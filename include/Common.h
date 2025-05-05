@@ -1,0 +1,80 @@
+#pragma once
+
+#include <iostream>
+
+/**
+ * @brief Represents the color of a chess piece.
+ */
+enum COLOR {
+    BLACK, ///< Black color
+    WHITE  ///< White color
+};
+
+/**
+ * @brief Represents the type (ID) of a chess piece.
+ */
+enum ID {
+    KING,   ///< King piece
+    QUEEN,  ///< Queen piece
+    KNIGHT, ///< Knight piece
+    ROOK,   ///< Rook piece
+    PAWN,   ///< Pawn piece
+    BISHOP  ///< Bishop piece
+};
+
+/**
+ * @brief Represents a coordinate on the chessboard.
+ * The coordinate is represented as a pair:
+ * - First: row (int)
+ * - Second: column (char)
+ * Example: {1, 'a'} represents A1 in standard chess notation.
+ */
+typedef std::pair<int, char> Coordinate;
+
+/**
+ * @brief Equality operator for chessboard coordinates.
+ * @param c1 First coordinate.
+ * @param c2 Second coordinate.
+ * @return true if both coordinates are equal.
+ * @return false otherwise.
+ */
+bool operator==(const Coordinate& c1, const Coordinate& c2);
+
+/**
+ * @brief Checks whether a coordinate lies within the bounds of a standard 8x8 chessboard.
+ * @param coord The coordinate to check.
+ * @return true if the coordinate is valid (1 <= row <= 8 and 'a' <= column <= 'h').
+ * @return false otherwise.
+ */
+bool inBoard(const Coordinate& coord);
+
+/**
+ * @brief Returns the opposite color.
+ * @param color The current color.
+ * @return COLOR The opposite color (BLACK <-> WHITE).
+ */
+COLOR colorNot(COLOR color);
+
+/**
+ * @brief Flips a coordinate vertically as if rotating the board 180 degrees.
+ * Useful for perspective flipping between players.
+ * @param coord The coordinate to flip.
+ * @return Coordinate The flipped coordinate.
+ */
+Coordinate flipChessCoord(const Coordinate& coord);
+
+
+struct Move{
+    // Overloads the subtraction operator to compare two Move objects based on their score.
+    // Returns the difference in scores between this move and another.
+    int operator-(const Move&other) const{return _score -  other._score;}
+    // Declares a friend function for outputting a Move object to an output stream.
+    // This allows access to private members for formatted printing.
+    friend std::ostream& operator<<(std::ostream& os, const Move& mv);
+    // The starting coordinate of the move.
+    Coordinate _source;
+    // The ending coordinate of the move.
+    Coordinate _destination;
+    // A score used to evaluate the quality or desirability of the move.
+    int _score;
+};
