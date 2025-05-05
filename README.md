@@ -47,3 +47,30 @@ Custom exceptions ensure safe runtime behavior:
 
 - `WrongPromotionInput` — thrown when an invalid piece type is chosen during pawn promotion.
 - `NullPiece` — thrown when attempting to access a null piece pointer (usually due to board misconfiguration or faulty logic).
+
+- ## 👑 Pawn Promotion Logic
+
+This project includes full logic for **pawn promotion**. When a pawn reaches the opposite end of the board, the user is prompted to select one of four valid promotion options:
+
+- Queen  
+- Rook  
+- Bishop  
+- Knight
+
+If the user enters an invalid option, a custom exception `WrongPromotionInput` is thrown to ensure valid input.
+
+### 🔧 Internal Handling
+
+- Promotion is handled via the `Pawn::userPromotionChoice()` method.
+- The promoted piece is stored in the `promotedPiece` member as a `std::shared_ptr<Piece>`.
+- The method `Pawn::canPromote()` checks whether the pawn has reached the correct row for promotion.
+- The promoted piece is fully integrated into the game's logic, including movement, threat evaluation, and AI calculations.
+
+### ⚠️ Limitation
+
+Due to assignment constraints, the provided `Chess` class could not be modified. As a result:
+
+> **The visual board display does not show the promoted piece.**
+
+However, the internal logic of the game correctly treats the promoted piece according to its new type (e.g., a promoted queen moves and attacks like a queen). The AI and game engine fully support promotions in gameplay logic, including during simulations.
+
