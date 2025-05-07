@@ -1,13 +1,7 @@
 #pragma once
-
 #include "Piece.h"
 #include <vector>
 #include <memory>
-
-/**
- * @file Bishop.h
- * @brief Bishop Class Definition.
- */
 
 /**
  * @class Bishop
