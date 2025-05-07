@@ -45,7 +45,7 @@ Pieces::Pieces(const Pieces &board) {
     }
 }
 
- */bool Pieces::isOccupiedBox(const Coordinate& location) const {
+ bool Pieces::isOccupiedBox(const Coordinate& location) const {
     return _board.find(location) != _board.end();
 }
 
