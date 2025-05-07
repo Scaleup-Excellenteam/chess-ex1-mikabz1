@@ -1,4 +1,3 @@
-// Chess
 #include "Chess.h"
 #include "Pieces.h"
 #include "Common.h"
@@ -8,10 +7,8 @@
 #include "PriorityAlgo.h"
 #include <chrono>
 
-// The main function where the chess game is initialized and executed.
 int main()
 {
-    // Priority queue to store the best moves based on the evaluation function
     PriorityQueue<Move> priorityQueue;
 //	string strBoard = "RNBQKBNRPPPPPPPP################################pppppppprnbqkbnr";
 	string strBoard = "##########K###############################R#####q#######r#######";
@@ -24,7 +21,6 @@ int main()
     COLOR turn = WHITE;
 
     mainBoard.updatePotenMoves(turn);
-    // Call the main algorithm to calculate the best moves and print the priority queue
     priorityQueue = mainAlgo(RECURSION_DEPTH , turn,mainBoard);
     priorityQueue.print();
 
@@ -50,15 +46,11 @@ int main()
             mainBoard.makeMove(target , sourcePiece);
             turn = colorNot(turn);
             mainBoard.updatePotenMoves(turn);
-            // Check if the opponent is in check and update the status
             mainBoard.isCheck(turn) ? codeResponse = STATUS_CHECK : codeResponse = STATUS_OK;
         }
-        // Set the response code to the Chess object
         a.setCodeResponse(codeResponse);
-        // Update the priority queue with the new best moves for the next turn
         priorityQueue = mainAlgo(RECURSION_DEPTH , turn,mainBoard);
         priorityQueue.print();
-        // Get the next move from the user
 		res = a.getInput();
 	}
 	cout << endl << "Exiting " << endl;
