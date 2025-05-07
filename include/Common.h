@@ -65,16 +65,9 @@ Coordinate flipChessCoord(const Coordinate& coord);
 
 
 struct Move{
-    // Overloads the subtraction operator to compare two Move objects based on their score.
-    // Returns the difference in scores between this move and another.
     int operator-(const Move&other) const{return _score -  other._score;}
-    // Declares a friend function for outputting a Move object to an output stream.
-    // This allows access to private members for formatted printing.
     friend std::ostream& operator<<(std::ostream& os, const Move& mv);
-    // The starting coordinate of the move.
     Coordinate _source;
-    // The ending coordinate of the move.
     Coordinate _destination;
-    // A score used to evaluate the quality or desirability of the move.
     int _score;
 };
